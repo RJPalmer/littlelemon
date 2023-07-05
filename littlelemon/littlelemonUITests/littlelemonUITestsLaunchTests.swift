@@ -29,4 +29,11 @@ final class littlelemonUITestsLaunchTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
     }
+    func testRegisterButtonExists() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let userInfo = app.buttons["Register"]
+        XCTAssert(userInfo.exists)
+    }
 }
