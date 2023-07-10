@@ -8,10 +8,6 @@
 import Foundation
 
 struct MenuList: Decodable {
-    init(from decoder: Decoder) throws {
-        menu = []
-    }
-    
-    var menu: [MenuItem]
+    let menu: [MenuItem]
 
 }

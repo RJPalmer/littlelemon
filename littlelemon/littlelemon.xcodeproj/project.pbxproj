@@ -34,6 +34,12 @@
 		306C79C82A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 306C79C62A574840001860E6 /* ExampleDatabase.xcdatamodeld */; };
 		306C79C92A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 306C79C62A574840001860E6 /* ExampleDatabase.xcdatamodeld */; };
 		306C79CA2A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 306C79C62A574840001860E6 /* ExampleDatabase.xcdatamodeld */; };
+		306C79D92A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D72A586AA4001860E6 /* Dish+CoreDataClass.swift */; };
+		306C79DA2A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D72A586AA4001860E6 /* Dish+CoreDataClass.swift */; };
+		306C79DB2A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D72A586AA4001860E6 /* Dish+CoreDataClass.swift */; };
+		306C79DC2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D82A586AA4001860E6 /* Dish+CoreDataProperties.swift */; };
+		306C79DD2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D82A586AA4001860E6 /* Dish+CoreDataProperties.swift */; };
+		306C79DE2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C79D82A586AA4001860E6 /* Dish+CoreDataProperties.swift */; };
 		3087C5842A4F239300A3A7E3 /* littlelemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087C5832A4F239300A3A7E3 /* littlelemonApp.swift */; };
 		3087C5862A4F239300A3A7E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087C5852A4F239300A3A7E3 /* ContentView.swift */; };
 		3087C5882A4F239400A3A7E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3087C5872A4F239400A3A7E3 /* Assets.xcassets */; };
@@ -70,6 +76,8 @@
 		306C79BE2A55D7B2001860E6 /* MenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuList.swift; sourceTree = "<group>"; };
 		306C79C22A55D969001860E6 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		306C79C72A574840001860E6 /* ExampleDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExampleDatabase.xcdatamodel; sourceTree = "<group>"; };
+		306C79D72A586AA4001860E6 /* Dish+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dish+CoreDataClass.swift"; sourceTree = "<group>"; };
+		306C79D82A586AA4001860E6 /* Dish+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dish+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3087C5802A4F239300A3A7E3 /* littlelemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = littlelemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3087C5832A4F239300A3A7E3 /* littlelemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = littlelemonApp.swift; sourceTree = "<group>"; };
 		3087C5852A4F239300A3A7E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +118,8 @@
 		3087C5772A4F239300A3A7E3 = {
 			isa = PBXGroup;
 			children = (
+				306C79D72A586AA4001860E6 /* Dish+CoreDataClass.swift */,
+				306C79D82A586AA4001860E6 /* Dish+CoreDataProperties.swift */,
 				3087C5822A4F239300A3A7E3 /* littlelemon */,
 				3087C5932A4F239400A3A7E3 /* littlelemonTests */,
 				3087C59D2A4F239400A3A7E3 /* littlelemonUITests */,
@@ -304,11 +314,13 @@
 			files = (
 				306C79C82A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */,
 				306C79A72A4F27DB001860E6 /* Onboarding.swift in Sources */,
+				306C79DC2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */,
 				3087C5862A4F239300A3A7E3 /* ContentView.swift in Sources */,
 				306C79B32A5351D3001860E6 /* UserProfile.swift in Sources */,
 				306C79B82A55D71F001860E6 /* Persistence.swift in Sources */,
 				306C79BB2A55D71F001860E6 /* FetchedObjects.swift in Sources */,
 				306C79AB2A531D66001860E6 /* Home.swift in Sources */,
+				306C79D92A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */,
 				3087C5842A4F239300A3A7E3 /* littlelemonApp.swift in Sources */,
 				306C79BF2A55D7B2001860E6 /* MenuList.swift in Sources */,
 				306C79AF2A5324BC001860E6 /* Menu.swift in Sources */,
@@ -326,10 +338,12 @@
 				306C79B42A5351D3001860E6 /* UserProfile.swift in Sources */,
 				306C79B92A55D71F001860E6 /* Persistence.swift in Sources */,
 				306C79C92A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */,
+				306C79DA2A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */,
 				306C79B02A5324BC001860E6 /* Menu.swift in Sources */,
 				306C79C42A55D96A001860E6 /* MenuItem.swift in Sources */,
 				306C79BC2A55D71F001860E6 /* FetchedObjects.swift in Sources */,
 				3087C5952A4F239400A3A7E3 /* littlelemonTests.swift in Sources */,
+				306C79DD2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,11 +353,13 @@
 			files = (
 				306C79CA2A574840001860E6 /* ExampleDatabase.xcdatamodeld in Sources */,
 				306C79A92A4F27DB001860E6 /* Onboarding.swift in Sources */,
+				306C79DE2A586AA4001860E6 /* Dish+CoreDataProperties.swift in Sources */,
 				3087C5A12A4F239400A3A7E3 /* littlelemonUITestsLaunchTests.swift in Sources */,
 				306C79B52A5351D3001860E6 /* UserProfile.swift in Sources */,
 				306C79BA2A55D71F001860E6 /* Persistence.swift in Sources */,
 				306C79BD2A55D71F001860E6 /* FetchedObjects.swift in Sources */,
 				306C79AD2A531D66001860E6 /* Home.swift in Sources */,
+				306C79DB2A586AA4001860E6 /* Dish+CoreDataClass.swift in Sources */,
 				3087C59F2A4F239400A3A7E3 /* littlelemonUITests.swift in Sources */,
 				306C79C12A55D7B2001860E6 /* MenuList.swift in Sources */,
 				306C79B12A5324BC001860E6 /* Menu.swift in Sources */,
