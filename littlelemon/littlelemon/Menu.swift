@@ -10,34 +10,45 @@ import SwiftUI
 struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State var searchText:String = ""
+    
     var body: some View {
         VStack(){
             Text("Little Lemon")
             Text("Chicago")
             Text("Description")
             
-            FetchedObjects(content: {
-                (dishes:[Dish]) in List{
-                    ForEach(dishes){
-                        dish in HStack(alignment: VerticalAlignment.center,
-                        spacing: 10){
-                            AsyncImage(url: URL(string: dish.image!)) { Image in
-                                Image.resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width:100, height: 100)
-                            } placeholder: {
-                                EmptyView()
+            TextField("Search Menu", text: $searchText)
+            FetchedObjects(predicate: buildPredicates() ,sortDescriptors: buildSortDescriptors(), content: {
+                    (dishes:[Dish]) in
+                NavigationStack{
+                    List{
+                        ForEach(dishes){
+                            dish in
+                            HStack(alignment: VerticalAlignment.top,
+                                   spacing: 5){
+                                NavigationLink(destination: MenuItemDetails(menuDish: dish)) {
+                                    AsyncImage(url: URL(string: dish.image!)) { Image in
+                                        Image.resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width:100, height: 100)
+                                    } placeholder: {
+                                        EmptyView()
+                                    }
+                                    Text(dish.title!)
+                                    Spacer(minLength: 5)
+                                    Text(dish.price!)
+                                }
                             }
-
-                            Text(dish.title!)
-                            Spacer(minLength: 5)
-                            Text(dish.price!)
                             
-                                 }
-                                 
-                                 }
+                                   
+                        }
+                    }
                 }
             })
+            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/4/*@END_MENU_TOKEN@*/)
+            
+            
         }
         .onAppear(){
             getMenuData()
@@ -82,6 +93,19 @@ struct Menu: View {
         task.resume()
         
            
+    }
+    
+    func buildSortDescriptors() -> [NSSortDescriptor] {
+        return [NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedStandardCompare))]
+    }
+    
+    func buildPredicates() -> NSPredicate{
+        if(searchText.isEmpty){
+            return NSPredicate(value: true)
+        }
+        else{
+            return NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+        }
     }
 }
 
