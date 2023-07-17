@@ -13,46 +13,55 @@ struct Menu: View {
     @State var searchText:String = ""
     
     var body: some View {
-        VStack(){
-            Text("Little Lemon")
-            Text("Chicago")
-            Text("Description")
-            
-            TextField("Search Menu", text: $searchText)
-            FetchedObjects(predicate: buildPredicates() ,sortDescriptors: buildSortDescriptors(), content: {
-                    (dishes:[Dish]) in
-                NavigationStack{
-                    List{
-                        ForEach(dishes){
-                            dish in
-                            HStack(alignment: VerticalAlignment.top,
-                                   spacing: 5){
-                                NavigationLink(destination: MenuItemDetails(menuDish: dish)) {
-                                    AsyncImage(url: URL(string: dish.image!)) { Image in
-                                        Image.resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width:100, height: 100)
-                                    } placeholder: {
-                                        EmptyView()
+        VStack(alignment: .center){
+            NavigationStack{
+                VStack(alignment: .center){
+                    headerView()
+                        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    HeroView(searchText: searchText)
+                        .border(Color.black, width: 1)
+                    MenuBreakdown()
+                        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    FetchedObjects(predicate: buildPredicates() ,sortDescriptors: buildSortDescriptors(), content: {
+                        (dishes:[Dish]) in
+                        VStack(alignment: .center){
+                            List{
+                                ForEach(dishes){
+                                    dish in
+                                    HStack(alignment: VerticalAlignment.top,
+                                           spacing: 5){
+                                        NavigationLink(destination: MenuItemDetails(menuDish: dish)
+                                            .environment(\.managedObjectContext, CoreDataStack.context)) {
+                                                AsyncImage(url: URL(string: dish.image!)) { Image in
+                                                    Image.resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width:100, height: 100)
+                                                } placeholder: {
+                                                    EmptyView()
+                                                }
+                                                Text(dish.title!)
+                                                Spacer(minLength: 5)
+                                                Text(dish.price!)
+                                            }
                                     }
-                                    Text(dish.title!)
-                                    Spacer(minLength: 5)
-                                    Text(dish.price!)
+                                    
+                                    
                                 }
                             }
-                            
-                                   
                         }
-                    }
+                    })
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 }
-            })
-            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/4/*@END_MENU_TOKEN@*/)
-            
-            
+                .frame(maxHeight: .infinity)
+                .border(/*@START_MENU_TOKEN@*/Color.red/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                
+            }
         }
+        .padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
         .onAppear(){
             getMenuData()
         }
+        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
     }
     
     func getMenuData() -> () {
@@ -112,5 +121,11 @@ struct Menu: View {
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
         Menu()
+    }
+}
+
+struct ExtractedView: View {
+    var body: some View {
+        Text("Little Lemon")
     }
 }

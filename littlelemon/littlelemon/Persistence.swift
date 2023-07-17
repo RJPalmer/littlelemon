@@ -20,3 +20,18 @@ struct PersistenceController {
         let _ = try? container.persistentStoreCoordinator.execute(deleteRequest, with: container.viewContext)
     }
 }
+
+struct CoreDataStack {
+        static var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+        static var persistentContainer: NSPersistentContainer = {
+                let container = NSPersistentContainer(name: "ExampleDatabase")
+                container.loadPersistentStores { (description, error) in
+                        if let error = error {
+                print(error)
+            }
+        }
+        return container
+    }()
+}
