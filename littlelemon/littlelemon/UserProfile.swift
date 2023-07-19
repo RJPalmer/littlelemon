@@ -16,26 +16,49 @@ struct UserProfile: View {
     @Environment(\.presentationMode) var presentation
     
     var body: some View {
-        VStack{
-            Text(verbatim: "Personal Information")
-            Image("profile-image-placeholder")
-                .padding(.vertical)
-                .frame(width: 100.0, height: 100.0)
-            LabeledContent("FirstName") {
-                Text(firstName)
+        VStack(alignment: .center){
+            headerView()
+            VStack{
+                Text(verbatim: "Personal Information")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
+                Image("profile-image-placeholder")
+                    .padding(.vertical)
+                    
+                VStack(spacing: 10){
+                    LabeledContent("FirstName") {
+                        Text(firstName)
+                        Spacer()
+                    }
+                    
+                    LabeledContent("Last Name: "){
+                        Text(lastName)
+                        Spacer()
+                    }
+                    LabeledContent("Email: "){
+                        Text(email)
+                        Spacer()
+                    }
+                }
+                .padding(.all)
+                .background(Color.secondary)
+                .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
             }
-            LabeledContent("Last Name: "){
-                Text(lastName)
-            }
-            LabeledContent("Email: "){
-                Text(email)
-            }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .background(Color("backgroundColor"))
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
             Button("Logout") {
                 UserDefaults.standard.set(false, forKey: "kIsLoggedIn")
                 self.presentation.wrappedValue.dismiss()
             }
             .padding(.top)
+            .buttonStyle(.bordered)
+            Spacer()
         }
+        .padding(.horizontal)
+        .frame(maxHeight: .infinity)
     }
 }
 

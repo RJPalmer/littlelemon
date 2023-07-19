@@ -16,6 +16,8 @@ struct headerView: View {
                     .foregroundColor(.yellow)
                 
                 Text("Little Lemon")
+                    .font(.title)
+                    .fontDesign(Font.Design.serif)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)

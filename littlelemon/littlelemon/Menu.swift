@@ -11,22 +11,32 @@ struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var searchText:String = ""
+    @State var dishCat:String = "mains"
+    
+    @FetchRequest(entity: Dish.entity(), sortDescriptors: []) var dishList: FetchedResults<Dish>
     
     var body: some View {
-        VStack(alignment: .center){
-            NavigationStack{
+        
+        
+        VStack(alignment: .center, spacing: 0){
+            headerView()
+            
                 VStack(alignment: .center){
-                    headerView()
-                        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    HeroView(searchText: searchText)
-                        .border(Color.black, width: 1)
-                    MenuBreakdown()
-                        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    FetchedObjects(predicate: buildPredicates() ,sortDescriptors: buildSortDescriptors(), content: {
-                        (dishes:[Dish]) in
-                        VStack(alignment: .center){
+                    HeroView(searchText: $searchText)
+                        .onChange(of: searchText){
+                            newValue in
+                               let filterPred = NSPredicate(format: "title CONTAINS[cd] %@ OR category == %@", searchText, newValue)
+                                dishList.nsPredicate = filterPred
+                        }
+                    MenuBreakdown(dishCategory: $dishCat)
+                        .onChange(of: dishCat) { newValue in
+                           let filterPred = NSPredicate(format: "title CONTAINS[cd] %@ OR category == %@", searchText, newValue)
+                            dishList.nsPredicate = filterPred
+                        }
+                        
+                    VStack(alignment: .center){
                             List{
-                                ForEach(dishes){
+                                ForEach(dishList){
                                     dish in
                                     HStack(alignment: VerticalAlignment.top,
                                            spacing: 5){
@@ -49,19 +59,15 @@ struct Menu: View {
                                 }
                             }
                         }
-                    })
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    Spacer()
                 }
-                .frame(maxHeight: .infinity)
                 .border(/*@START_MENU_TOKEN@*/Color.red/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 
             }
-        }
-        .padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
         .onAppear(){
             getMenuData()
         }
-        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+        
     }
     
     func getMenuData() -> () {
@@ -110,10 +116,13 @@ struct Menu: View {
     
     func buildPredicates() -> NSPredicate{
         if(searchText.isEmpty){
-            return NSPredicate(value: true)
+            return NSPredicate(format: "category == %@", dishCat)
         }
         else{
-            return NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+            let searchPred =  NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+            let catPred = NSPredicate(format: "category == %@", dishCat)
+            
+            return NSCompoundPredicate(orPredicateWithSubpredicates:[searchPred, catPred])
         }
     }
 }

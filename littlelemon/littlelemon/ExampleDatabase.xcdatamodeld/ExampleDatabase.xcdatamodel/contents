@@ -6,5 +6,8 @@
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <fetchedProperty name="fetechedDishes" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Dish" predicateString="title CONTAINS[cd] $FETCH_SOURCE.catPred"/>
+        </fetchedProperty>
     </entity>
 </model>

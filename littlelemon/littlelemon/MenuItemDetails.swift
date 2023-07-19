@@ -11,7 +11,7 @@ struct MenuItemDetails: View {
     @State var menuDish:Dish
     
     var body: some View {
-        VStack(spacing: 15.0){
+        VStack(alignment: .center, spacing: 15.0){
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             VStack {
                 Text(menuDish.title ?? "Title")
@@ -28,9 +28,9 @@ struct MenuItemDetails: View {
                 .frame(width: 300.0)
             }
             .scaledToFit()
+            
         }
         .padding(.all)
-        .frame(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/)
         .scaledToFill()
         
         

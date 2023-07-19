@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct HeroView: View {
-    @State var searchText:String
+    @Binding var searchText:String
     var body: some View {
         VStack{
             HStack(alignment: .center){
                 VStack(alignment: .leading){
                     Text("Little Lemon")
                         .font(.largeTitle)
+                        .fontDesign(.serif)
                         .fontWeight(.bold)
                         .foregroundColor(Color.yellow)
                         .multilineTextAlignment(.leading)
                     Text("Chicago")
                         .font(.subheadline)
+                        .fontDesign(.serif)
                     HStack(alignment: .center){
                         Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist")
                             .font(.system(size: 14))
@@ -30,10 +32,6 @@ struct HeroView: View {
                     }
                     .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
                 }
-                .frame(
-                    maxWidth: .infinity,
-                    alignment: .leading)
-                
             }
             .padding(/*@START_MENU_TOKEN@*/.all, 5.0/*@END_MENU_TOKEN@*/)
             .frame(maxWidth: .infinity)
@@ -44,6 +42,7 @@ struct HeroView: View {
             .background(Color(.secondarySystemBackground))
             .cornerRadius(10)
             .foregroundColor(.secondary)
+            Spacer()
         }
         .padding([.leading, .bottom, .trailing])
         .background(Color("backgroundColor"))
@@ -53,8 +52,8 @@ struct HeroView: View {
 }
 
 struct HeroView_Previews: PreviewProvider {
-    static var searchTxt:String = ""
+    @State static var searchTxt:String = ""
     static var previews: some View {
-        HeroView(searchText: searchTxt)
+        HeroView(searchText: $searchTxt)
     }
 }
